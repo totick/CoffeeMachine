@@ -6,4 +6,20 @@ resources = {
     "money": (0, "$")
 }
 
+def print_report():
+    for key, value in resources.items():
+        amount, unit = value
+        print(f"\t{key.capitalize()}:\t{amount}{unit}")
 
+
+while True:
+    print("What would you like?")
+    user_input = input("> ").lower()
+
+    match user_input:
+        case "off":
+            break
+        case "report":
+            print_report()
+        case _:
+            print(user_input)
