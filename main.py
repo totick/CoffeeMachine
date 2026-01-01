@@ -13,12 +13,18 @@ def print_report():
 
 
 while True:
-    print("What would you like?")
+    print("What would you like? (espresso/latte/capuccino)")
     user_input = input("> ").lower()
 
     match user_input:
         case "off":
             break
+        case "espresso":
+            pass
+        case "latte":
+            pass
+        case "cappuccino":
+            pass
         case "report":
             print_report()
         case _:
