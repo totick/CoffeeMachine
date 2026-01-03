@@ -1,18 +1,19 @@
-ESPRESSO = {
-    "water": {"amount": 50, "unit": "ml"},
-    "coffee": {"amount": 18, "unit": "g"}
-}
 
-LATTE = {
-    "water": {"amount": 200, "unit": "ml"},
-    "milk": {"amount": 150, "unit": "ml"},
-    "coffee": {"amount": 24, "unit": "g"}
-}
-
-CAPPUCCINO = {
-    "water": {"amount": 250, "unit": "ml"},
-    "milk": {"amount": 100, "unit": "ml"},
-    "coffee": {"amount": 24, "unit": "g"}
+drinks = {
+    "espresso": {
+        "water": {"amount": 50, "unit": "ml"},
+        "coffee": {"amount": 18, "unit": "g"}
+    },
+    "latte": {
+        "water": {"amount": 200, "unit": "ml"},
+        "milk": {"amount": 150, "unit": "ml"},
+        "coffee": {"amount": 24, "unit": "g"}
+    },
+    "cappuccino": {
+        "water": {"amount": 250, "unit": "ml"},
+        "milk": {"amount": 100, "unit": "ml"},
+        "coffee": {"amount": 24, "unit": "g"}
+    }
 }
 
 resources = {
@@ -25,6 +26,10 @@ resources = {
 def print_report():
     for key, value in resources.items():
         print(f"\t{key.capitalize()}:\t{value["amount"]}{value["unit"]}")
+
+
+def check_resources(drink_name: str) -> bool:
+    pass
 
 
 while True:
