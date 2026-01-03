@@ -1,15 +1,30 @@
+ESPRESSO = {
+    "water": {"amount": 50, "unit": "ml"},
+    "coffee": {"amount": 18, "unit": "g"}
+}
+
+LATTE = {
+    "water": {"amount": 200, "unit": "ml"},
+    "milk": {"amount": 150, "unit": "ml"},
+    "coffee": {"amount": 24, "unit": "g"}
+}
+
+CAPPUCCINO = {
+    "water": {"amount": 250, "unit": "ml"},
+    "milk": {"amount": 100, "unit": "ml"},
+    "coffee": {"amount": 24, "unit": "g"}
+}
 
 resources = {
-    "water": (100, "ml"),
-    "milk": (50, "ml"),
-    "coffee": (76, "ml"),
-    "money": (0, "$")
+    "water": {"amount": 100, "unit": "ml"},
+    "milk": {"amount": 50, "unit": "ml"},
+    "coffee": {"amount": 76, "unit": "g"},
+    "money": {"amount": 0, "unit": "$"}
 }
 
 def print_report():
     for key, value in resources.items():
-        amount, unit = value
-        print(f"\t{key.capitalize()}:\t{amount}{unit}")
+        print(f"\t{key.capitalize()}:\t{value["amount"]}{value["unit"]}")
 
 
 while True:
