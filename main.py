@@ -8,26 +8,34 @@ UNITS = {
 
 drinks = {
     "espresso": {
-        "water": 50,
-        "coffee": 18
+        "resources": {
+            "water": 50,
+            "coffee": 18
+        },
+        "money": 1.5
     },
     "latte": {
-        "water": 200,
-        "milk": 150,
-        "coffee": 24
+        "resources": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "money": 2.5
     },
     "cappuccino": {
-        "water": 250,
-        "milk": 100,
-        "coffee": 24
+        "resources": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24
+        },
+        "money": 3
     }
 }
 
 resources = {
     "water": 100,
     "milk": 50,
-    "coffee": 76,
-    "money": 0
+    "coffee": 76
 }
 
 def print_report():
@@ -42,30 +50,41 @@ def check_resources(drink_name: str) -> list[tuple(str, int)]:
     :return: A list with tuples containing the name and the missing amount of the resource, if no missing ingredients
         it returns an empty list.
     """
-    drink: dict = drinks[drink_name]
+    drink_resources: dict = drinks[drink_name]["resources"]
     missing_resources: list[tuple(str, int)] = []
 
-    for key, value in drink.items():
+    for key, value in drink_resources.items():
         if value >= resources[key]:
-            missing_amount = resources[key] - value
+            missing_amount = abs(resources[key] - value)
             missing_resources.append((key, missing_amount))
 
     return missing_resources
 
+# TODO: Handle payment
+def handle_payment(drink_name: str):
+    pass
+
+
+def prepare_drink(drink_name: str) -> None:
+    missing: list = check_resources(drink_name)
+    if missing:
+        print("Not able to prepare drink. Missing resources:")
+        for resource_name, amount in missing:
+            print(f"\t{resource_name}: {amount} {UNITS[resource_name]}")
+        return
+
+    print("Pay dollar for drink please!")
+
 
 while True:
-    print("What would you like? (espresso/latte/capuccino)")
-    user_input = input("> ").strip().lower()
+    print("What would you like? (espresso/latte/cappuccino)")
+    user_input = input(">> ").strip().lower()
 
     match user_input:
         case "off":
             break
-        case "espresso":
-            pass
-        case "latte":
-            pass
-        case "cappuccino":
-            pass
+        case "espresso" | "latte" | "cappuccino":
+            prepare_drink(user_input)
         case "report":
             print_report()
         case _:
