@@ -1,40 +1,61 @@
 
+UNITS = {
+    "water": "ml",
+    "milk": "ml",
+    "coffee": "g",
+    "money": "$"
+}
+
 drinks = {
     "espresso": {
-        "water": {"amount": 50, "unit": "ml"},
-        "coffee": {"amount": 18, "unit": "g"}
+        "water": 50,
+        "coffee": 18
     },
     "latte": {
-        "water": {"amount": 200, "unit": "ml"},
-        "milk": {"amount": 150, "unit": "ml"},
-        "coffee": {"amount": 24, "unit": "g"}
+        "water": 200,
+        "milk": 150,
+        "coffee": 24
     },
     "cappuccino": {
-        "water": {"amount": 250, "unit": "ml"},
-        "milk": {"amount": 100, "unit": "ml"},
-        "coffee": {"amount": 24, "unit": "g"}
+        "water": 250,
+        "milk": 100,
+        "coffee": 24
     }
 }
 
 resources = {
-    "water": {"amount": 100, "unit": "ml"},
-    "milk": {"amount": 50, "unit": "ml"},
-    "coffee": {"amount": 76, "unit": "g"},
-    "money": {"amount": 0, "unit": "$"}
+    "water": 100,
+    "milk": 50,
+    "coffee": 76,
+    "money": 0
 }
 
 def print_report():
     for key, value in resources.items():
-        print(f"\t{key.capitalize()}:\t{value["amount"]}{value["unit"]}")
+        print(f"\t{key.capitalize()}:\t{value} {UNITS[key]}")
 
 
-def check_resources(drink_name: str) -> bool:
-    pass
+def check_resources(drink_name: str) -> list[tuple(str, int)]:
+    """
+    Checks if there are enough resources for creating the drink.
+    :param drink_name: THe name of the drink to prepare
+    :return: A list with tuples containing the name and the missing amount of the resource, if no missing ingredients
+        it returns an empty list.
+    """
+    drink: dict = drinks[drink_name]
+    missing_resources: list[tuple(str, int)] = []
+
+    for key, value in drink.items():
+        if value >= resources[key]:
+            missing_amount = resources[key] - value
+            missing_resources.append((key, missing_amount))
+
+    return missing_resources
 
 
 while True:
     print("What would you like? (espresso/latte/capuccino)")
-    user_input = input("> ").lower()
+    user_input = input("> ").strip().lower()
 
     match user_input:
         case "off":
@@ -49,3 +70,5 @@ while True:
             print_report()
         case _:
             print(user_input)
+
+print("Coffee machine off.")
