@@ -48,7 +48,10 @@ coffee_machine = {
 }
 
 
-def print_report():
+def print_report() -> None:
+    """
+    Prints the resources available in the coffee machine
+    """
     for key, value in coffee_machine["resources"].items():
         print(f"\t{key.capitalize()}:\t{value} {UNITS[key]}")
 
@@ -95,6 +98,10 @@ def process_payment(drink_name: str) -> bool:
 
 
 def update_resources(drink_name: str) -> None:
+    """
+    Updates the resources of the coffee machine (water, milk, coffee) but subtracting the resources needed for the drink
+    :param drink_name: Then name of the drink
+    """
     drink_resources = drinks[drink_name]["resources"]
     for resource_name, resource_value in drink_resources.items():
         coffee_machine["resources"][resource_name] -= resource_value
