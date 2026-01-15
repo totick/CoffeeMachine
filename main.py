@@ -53,7 +53,7 @@ def print_report():
         print(f"\t{key.capitalize()}:\t{value} {UNITS[key]}")
 
 
-def check_resources(drink_name: str) -> list[tuple(str, int)]:
+def check_resources(drink_name: str) -> list[tuple]:
     """
     Checks if there are enough resources for creating the drink.
     :param drink_name: THe name of the drink to prepare
@@ -61,7 +61,7 @@ def check_resources(drink_name: str) -> list[tuple(str, int)]:
         it returns an empty list.
     """
     drink_resources: dict = drinks[drink_name]["resources"]
-    missing_resources: list[tuple(str, int)] = []
+    missing_resources: list[tuple] = []
 
     for key, value in drink_resources.items():
         if value >= coffee_machine["resources"][key]:
