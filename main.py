@@ -44,7 +44,8 @@ coffee_machine = {
         "water": 300,
         "milk": 200,
         "coffee": 100
-    }
+    },
+    "money": 0.0
 }
 
 
@@ -54,6 +55,7 @@ def print_report() -> None:
     """
     for key, value in coffee_machine["resources"].items():
         print(f"\t{key.capitalize()}:\t{value} {UNITS[key]}")
+    print(f"Money: ${coffee_machine['money']:.2f}")
 
 
 def check_resources(drink_name: str) -> list[tuple]:
@@ -89,6 +91,7 @@ def process_payment(drink_name: str) -> bool:
         amount = int(input(f"{name}s = "))
         total += amount * value
         if total >= price_of_drink:
+            coffee_machine["money"] += price_of_drink
             payment_success = True
             break
 
