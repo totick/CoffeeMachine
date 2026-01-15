@@ -64,7 +64,7 @@ def check_resources(drink_name: str) -> list[tuple]:
     missing_resources: list[tuple] = []
 
     for key, value in drink_resources.items():
-        if value >= coffee_machine["resources"][key]:
+        if value > coffee_machine["resources"][key]:
             missing_amount = abs(coffee_machine["resources"][key] - value)
             missing_resources.append((key, missing_amount))
 
@@ -94,6 +94,12 @@ def process_payment(drink_name: str) -> bool:
     return payment_success
 
 
+def update_resources(drink_name: str) -> None:
+    drink_resources = drinks[drink_name]["resources"]
+    for resource_name, resource_value in drink_resources.items():
+        coffee_machine["resources"][resource_name] -= resource_value
+
+
 def prepare_drink(drink_name: str) -> None:
     missing: list = check_resources(drink_name)
     if missing:
@@ -104,6 +110,7 @@ def prepare_drink(drink_name: str) -> None:
 
     payment_success = process_payment(drink_name)
     if payment_success:
+        update_resources(drink_name)
         print(f"Here is your {drink_name}")
     else:
         print(f"Not enough payment")
