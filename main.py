@@ -78,10 +78,11 @@ def process_coins(drink_name: str) -> None:
     Exits function when the user gives a value that is not a coin.
     :param drink_name: The name of the drink to pay for.
     """
-    print(f"{drink_name}: {drinks[drink_name]["money"]}$")
+    price_of_drink = drinks[drink_name]["money"]
+    print(f"{drink_name}: ${price_of_drink:.2f}")
     while True:
         left_to_pay = drinks[drink_name]["money"] - coffee_machine["money"]
-        print(f"Left to pay: {left_to_pay:.2}$")
+        print(f"Left to pay: ${left_to_pay:.2f}$")
         print("Please insert coins (quarter = 25, dime = 10, nickel = 5, penny = 1):")
         payment_input = input(">> ")
         if payment_input.lower() in COINS:
@@ -89,7 +90,6 @@ def process_coins(drink_name: str) -> None:
             coffee_machine["money"] += coin_value
         else:
             break
-
 
 
 def prepare_drink(drink_name: str) -> None:
