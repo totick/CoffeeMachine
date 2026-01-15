@@ -72,6 +72,11 @@ def check_resources(drink_name: str) -> list[tuple(str, int)]:
 
 
 def process_payment(drink_name: str) -> bool:
+    """
+    Gets payment input from the user. Returns True if payment for drink was successful.
+    :param drink_name: The name of the drink
+    :return: True if payment was enough, otherwise False
+    """
     total: float = 0
     payment_success = False
     price_of_drink = drinks[drink_name]["money"]
