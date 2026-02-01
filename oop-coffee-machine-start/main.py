@@ -2,6 +2,9 @@ from menu import Menu
 from coffee_maker import CoffeeMaker
 from money_machine import MoneyMachine
 
+cm = CoffeeMaker()
+mm = MoneyMachine()
+m = Menu()
 
 while True:
     print("What would you like? (espresso/latte/cappuccino)")
@@ -11,11 +14,16 @@ while True:
         case "off":
             break
         case "espresso" | "latte" | "cappuccino":
-            #prepare_drink(user_input)
-            pass
+            drink = m.find_drink(user_input)
+            if cm.is_resource_sufficient(drink):
+                mm.process_coins()
+                mm.make_payment(drink.cost)
+                cm.make_coffee(drink)
+            else:
+                print("Unable to make drink")
         case "report":
-            #print_report()
-            pass
+            cm.report()
+            mm.report()
         case _:
             print("Not a valid option: ", user_input)
 
