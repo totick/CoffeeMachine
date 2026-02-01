@@ -7,7 +7,8 @@ mm = MoneyMachine()
 m = Menu()
 
 while True:
-    print("What would you like? (espresso/latte/cappuccino)")
+    print("What would you like?")
+    print(m.get_items())
     user_input = input(">> ").strip().lower()
 
     match user_input:
