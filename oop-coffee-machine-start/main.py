@@ -17,9 +17,11 @@ while True:
         case "espresso" | "latte" | "cappuccino":
             drink = m.find_drink(user_input)
             if cm.is_resource_sufficient(drink):
-                mm.process_coins()
-                mm.make_payment(drink.cost)
-                cm.make_coffee(drink)
+                enough_money = mm.make_payment(drink.cost)
+                if enough_money:
+                    cm.make_coffee(drink)
+                else:
+                    print("Not enough money, no drink for you!!!")
             else:
                 print("Unable to make drink")
         case "report":
