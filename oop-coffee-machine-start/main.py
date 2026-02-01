@@ -17,7 +17,6 @@ while True:
             #print_report()
             pass
         case _:
-            #print(user_input)
-            pass
+            print("Not a valid option: ", user_input)
 
 print("Coffee machine off.")
